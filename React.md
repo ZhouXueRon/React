@@ -1,16 +1,16 @@
 > 官网：https://react.docschina.org/
 
+# 起步
 
+## React简介
 
-# React简介
-
-## 什么是React?
+### 什么是React?
 
 ​	react是由Facebook研发的、用于解决UI复杂度的开源**JavaScript库**，目前由React联合社区维护。
 
 > 它不是框架，只是为了解决UI复杂度而诞生的一个库
 
-## React的特点
+### React的特点
 
 - **轻量**：React的开发版本所有源码（包含注释）仅3000多行
 - **原生**：所有的React的代码都是用原生JS书写而成的，不依赖其他任何库
@@ -21,7 +21,7 @@
 - **用JS代码声明界面**
 - **组件化**
 
-## 对比Vue
+### 对比Vue
 
 |   对比项   | Vue  | React |
 | :--------: | :--: | :---: |
@@ -34,7 +34,7 @@
 |  中型企业  |  √   |       |
 |    生态    |      |   √   |
 
-## 学习路径
+### 学习路径
 
 > 整体原则：熟悉API --> 深入理解原理
 
@@ -52,3 +52,58 @@
 6. 源码部分
    - React源码分析
    - Redux源码分析
+
+## Hello World
+
+> ### 直接在页面上使用React，引入下面的JS
+
+~~~html
+<!-- React的核心库，与宿主环境无关 -->
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<!-- 依赖核心库，将核心库的功能与页面结合 -->
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+~~~
+
+==说明：==crossorigin用于跨域访问报错时显示更详细的错误信息
+
+### 创建React元素
+
+1. **React.createElement**，用于创建一个React元素，称作虚拟DOM，本质上是一个对象
+
+   - 参数1：元素类型，如果是字符串，一个普通的HTML元素
+   - 参数2：元素的属性，一个对象
+   - 后续参数：元素的子节点
+
+   ~~~html
+   <script>
+       // 创建一个span元素
+       const span = React.createElement("span", {}, "一个sapn元素")
+       // 创建一个h1元素
+       const h1 = React.createElement("h1", {
+           title: "第一个React元素",
+       }, "Hello", "World", span);
+       // 渲染数据
+       ReactDOM.render(h1, document.getElementById("root"));
+   </script>
+   ~~~
+
+2. **JSX**
+
+   JS扩展语法，需要使用babel进行转义
+
+   ~~~html
+   <script type="text/babel">
+   	// 创建一个span元素
+   	const span = <span>一个span元素</span>
+   	// 创建一个h1元素
+   	const h1 = <h1 title="第一个React元素">
+   		Hello World
+   		<span>一个span元素</span>
+       </h1>
+       // 渲染数据
+       ReactDOM.render(h1, document.getElementById("root"));
+   </script>
+   ~~~
+
+   
+
