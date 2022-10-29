@@ -262,4 +262,72 @@ ReactDOM.render(div, document.getElementById('root'));
 - 虽然JSX元素是一个对象，但是该对象中的所有属性不可更改
 - 如果确定需要更改元素的属性，需要重新创建JSX元素
 
- 
+##  [demo]图片切换
+
+> index.js
+
+~~~js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import src1 from "./assets/1.png";
+import src2 from "./assets/2.png";
+import src3 from "./assets/3.png";
+import "./index.css";
+
+const container = document.getElementById('root');
+const srcs = [src1, src2, src3]; // 保存图片路径的数组
+let index = 1; // 显示图片的索引
+let timer;
+
+/**
+ * 根据index的值，显示对应的图片
+ */
+function render() {
+    ReactDOM.render(<img src={srcs[index]} alt="" />, container);
+}
+
+/**
+ * 启动计时器，每隔一段时间切换图片
+ */
+function start() {
+    stop();
+    timer = setInterval(() => {
+        index = (index + 1) % 3; // 改变index
+        render();
+    }, 2000)
+}
+
+/**
+ * 停止计时器
+ */
+function stop() {
+    clearInterval(timer);
+}
+
+container.onmouseenter = () => {
+    stop();
+}
+container.onmouseleave = () => {
+    start();
+}
+
+render();
+start();
+~~~
+
+> index.css
+
+~~~css
+#root {
+    width: 520px;
+    height: 280px;
+    border: 2px solid;
+    margin: 0 auto;
+}
+
+#root img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+~~~
