@@ -1,35 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import src1 from "./assets/1.png";
+import src2 from "./assets/2.png";
+import src3 from "./assets/3.png";
+import "./index.css";
 
-// const h1 = (
-//     <React.Fragment>
-//         <h1>Hello World <span>span元素</span></h1>
-//         <p>p元素</p>
-//     </React.Fragment>
-// )
+const container = document.getElementById('root');
+const srcs = [src1, src2, src3]; // 保存图片路径的数组
+let index = 1; // 显示图片的索引
+let timer;
 
-const a = 123, b = 456;
-const obj = { a: 1, b: 2 };
-const objReact = <h1>这是一个元素对象</h1>;
-const arr = [1, 2, 3, 4, 5];
-const lis = new Array(3).fill(0).map((item, i) => (<li key={i}>{i}</li>))
+/**
+ * 根据index的值，显示对应的图片
+ */
+function render() {
+    ReactDOM.render(<img src={srcs[index]} alt="" />, container);
+}
 
-const div = (
-    <div>
-        {a} * {b} = {a * b}
-        <p>
-            {/* 以下不会产生任何输出 */}
-            {null}
-            {undefined}
-            {false}
-        </p>
-        {/* 普通对象无法防止 */}
-        {/* <p>{obj}</p> */} 
-        {/* React元素对象可以放置 */}
-        <div>{objReact}</div>
-        <p>{arr}</p>
-        <ul>{lis}</ul>
-    </div>
-)
+/**
+ * 启动计时器，每隔一段时间切换图片
+ */
+function start() {
+    stop();
+    timer = setInterval(() => {
+        index = (index + 1) % 3; // 改变index
+        render();
+    }, 2000)
+}
 
-ReactDOM.render(div, document.getElementById('root'));
+/**
+ * 停止计时器
+ */
+function stop() {
+    clearInterval(timer);
+}
+
+container.onmouseenter = () => {
+    stop();
+}
+container.onmouseleave = () => {
+    start();
+}
+
+render();
+start();
