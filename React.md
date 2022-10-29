@@ -422,3 +422,68 @@ ReactDOM.render(<div>
 
 3. React中的哲学：数据属于谁，谁才有权利改变。**故而React中的数据是自顶向下流动的**
 
+## [demo]显示学生列表
+
+> index.js
+
+~~~js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import StudentList from './components/StudentList';
+
+const appkey = "demo13_1545210570249";
+/**
+ * 获取所以的学生数据
+ */
+const fetchAllStudents = async() => {
+    const stus = await fetch("http://api.duyiedu.com/api/student/findAll?appkey=" + appkey)
+        .then(resp => resp.json()).then(resp => resp.data);
+    return stus;
+}
+
+const render = async() => {
+    ReactDOM.render('正在加载中......', document.getElementById('root'));
+    const stus = await fetchAllStudents(); // 获取学生数组
+    ReactDOM.render(<StudentList stus={stus} />, document.getElementById('root'));
+}
+
+render();
+~~~
+
+> StudentList.js
+
+~~~js
+import React, { Component } from 'react';
+import Student from './Student';
+
+export default class StudentList extends Component {
+  render() {
+    // 约定：props.stus，传递的是学生的数组
+    const stus = this.props.stus.map(item => <Student key={item.id} {...item} />)
+    return (
+      <ul>{stus}</ul>
+    )
+  }
+}
+~~~
+
+> Student.js
+
+~~~js
+import React from 'react'
+
+export default function Student(props) {
+    // 假设所有学生的信息都是分开传递的
+    return (
+        <li>
+            {/* 显示学生的所有数据 */}
+            【姓名：】{props.name}，
+            【email：】{props.email}，
+            【性别：】{props.sex === 1 ? '男' : '女'}，
+            【出生年份：】{props.birth}
+        </li>
+    )
+}
+~~~
+
+==示例：==<img src="React.assets/Snipaste20221029235826.png" style="zoom:50%;" />
