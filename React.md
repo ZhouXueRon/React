@@ -262,7 +262,7 @@ ReactDOM.render(div, document.getElementById('root'));
 - 虽然JSX元素是一个对象，但是该对象中的所有属性不可更改
 - 如果确定需要更改元素的属性，需要重新创建JSX元素
 
-##  [demo]图片切换
+## [demo]图片切换
 
 > index.js
 
@@ -331,3 +331,94 @@ start();
     display: block;
 }
 ~~~
+
+## 组件与组件属性
+
+**组件：**包含内容、样式和功能的UI单元
+
+### 创建组件
+
+==特别注意：组件的名称首字母必须大写==
+
+1. 函数组件
+
+   返回一个React元素
+
+   > MyFuncComp.js
+
+   ~~~js
+   import React from 'react';
+   
+   export default function MyFuncComp() {
+       return <h1>这是函数组件</h1>
+   }
+   ~~~
+
+2. 类组件
+
+   必须继承React.Component
+
+   必须提供render函数，用于渲染组件
+
+   > MyClassComp.js
+
+   ~~~js
+   import React, { Component } from 'react'
+   
+   export default class MyClassComp extends Component {
+     render() {
+       return <h1>这是类组件</h1>
+     }
+   }
+   ~~~
+
+### 组件的属性
+
+> index.js
+
+~~~js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import MyFuncComp from './MyFuncComp';
+import MyClassComp from './MyClassComp';
+
+ReactDOM.render(<div>
+    <MyFuncComp number={3} />
+    <MyClassComp number='3' />
+</div>, document.getElementById('root'));
+~~~
+
+1. 对于函数组件，属性会作为一个对象的属性，传递给函数的参数
+
+   > MyFuncComp.js
+
+   ~~~js
+   import React from 'react';
+   
+   export default function MyFuncComp(props) {
+       return <h1>这是函数组件，数字：{props.number}</h1>
+   }
+   ~~~
+
+2. 对于类组件，属性会作为一个对象的属性，传递给构造函数的参数
+
+   > MyClassComp.js
+
+   ~~~js
+   import React, { Component } from 'react'
+   
+   export default class MyClassComp extends Component {
+       constructor(props) {
+           super();
+       }
+       
+       render() {
+           return <h1>这是类组件，数字：{this.props.number}</h1>
+       }
+   }
+   ~~~
+
+​	==注意：组件的属性，应该使用小驼峰命名法。==**组件无法改变自身的属性，React元素本质上就是一个组件（内置组件）**
+
+3. React中的哲学：数据属于谁，谁才有权利改变。**故而React中的数据是自顶向下流动的**
+
