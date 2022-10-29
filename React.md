@@ -107,3 +107,59 @@
 
    
 
+## 使用脚手架
+
+- 官方：create-react-app
+- 第三方：next.js、umijs
+
+==注意：==凡是使用JSX的文件，必须导入React
+
+> 命令
+
+~~~powershell
+yarn create react-app 工程名
+~~~
+
+> package.json
+
+~~~json
+{
+  "name": "react-learn",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {	// 依赖项
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.0"
+  },
+  "scripts": { // 运行脚本
+    "start": "react-scripts start",	// 启动
+    "build": "react-scripts build",	// 部署
+    "test": "react-scripts test",		// 测试
+    "eject": "react-scripts eject"	// 反编译
+  },
+  "eslintConfig": {	// 代码风格检查
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+~~~
+
