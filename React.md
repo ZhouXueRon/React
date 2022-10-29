@@ -185,3 +185,81 @@ yarn create react-app 工程名
 ### Chrome插件安装
 
 > React Developer Tools
+
+
+
+# Reacth核心概念
+
+## JSX
+
+### 什么是JSX
+
+- Facebook起草的JS扩展语法
+- 本质是一个JS对象，会被babel编译，最终会被转换为React.createElement
+- 每个JSX表达式，有且仅有一个根节点
+  - React.Fragment(<></>)
+- 每个JSX元素必须有结束标签（XML规范）
+
+~~~js
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const h1 = (
+    <React.Fragment>
+        <h1>Hello World <span>span元素</span></h1>
+        <p>p元素</p>
+    </React.Fragment>
+)
+
+ReactDOM.render(h1, document.getElementById('root'));
+~~~
+
+### 在JSX中嵌入表达式
+
+- 将表达式作为内容的一部分
+  - null、undefined和false不会显示
+- 将表达式作为元素属性
+- 属性使用小驼峰命名法
+- 防止注入攻击
+  - 自动编码
+  - dangerouslySetInnerHTML
+
+~~~js
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const a = 123, b = 456;
+const obj = { a: 1, b: 2 };
+const objReact = <h1>这是一个元素对象</h1>;
+const arr = [1, 2, 3, 4, 5];
+const lis = new Array(3).fill(0).map((item, i) => (<li key={i}>{i}</li>))
+
+const div = (
+    <div>
+        {a} * {b} = {a * b}
+        <p>
+            {/* 以下不会产生任何输出 */}
+            {null}
+            {undefined}
+            {false}
+        </p>
+        {/* 普通对象无法防止 */}
+        {/* <p>{obj}</p> */} 
+        {/* React元素对象可以放置 */}
+        <div>{objReact}</div>
+        <p>{arr}</p>
+        <ul>{lis}</ul>
+    </div>
+)
+
+ReactDOM.render(div, document.getElementById('root'));
+~~~
+
+==示例：==<img src="React.assets/Snipaste20221029200210.png"  />
+
+### 元素的不可变性
+
+- 虽然JSX元素是一个对象，但是该对象中的所有属性不可更改
+- 如果确定需要更改元素的属性，需要重新创建JSX元素
+
+ 
