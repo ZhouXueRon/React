@@ -163,3 +163,25 @@ yarn create react-app 工程名
 }
 ~~~
 
+## 开发环境
+
+### VSCode配置
+
+> emmet配置
+
+- 点击左下角"设置"
+- 搜索emmet
+- 设置如下属性
+
+~~~json
+"emmet.triggerExpansionOnTab": true
+~~~
+
+### VSCode插件安装
+
+- ESLint：代码风格检查
+- ES7 React/Redux/GraphQL/React-Native snippets：快速代码编写
+
+### Chrome插件安装
+
+> React Developer Tools
