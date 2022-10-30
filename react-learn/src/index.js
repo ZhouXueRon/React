@@ -1,10 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import BallList from './components/BallList';
 
-ReactDOM.render(<div></div>, document.getElementById('root'));
-
-
-
-
-
-
+ReactDOM.render(<BallList /> , document.getElementById('root'));
