@@ -1,16 +1,22 @@
 import React from 'react';
 import './index.css';
+import PropTypes from 'prop-types';
+import types from '../../../utils/commonTypes';
+
+Modal.defaultProps = { // 默认属性
+    bg: 'rgba(0, 0, 0, .5)'
+};
+
+Modal.protoTypes = {
+    children: types.children,
+    bg: PropTypes.string,
+    onClose: PropTypes.func
+}
 
 export default function Modal(props) {
-    const defaultProps = { // 默认属性
-        bg: 'rgba(0, 0, 0, .5)'
-    };
-
-    const datas = Object.assign({}, defaultProps, props);
-
     const handleClick = (e) => {
         if (e.target.className === 'modal') {
-            datas.onClose();
+            props.onClose();
         }
     }
 
@@ -18,12 +24,12 @@ export default function Modal(props) {
         <div
             className='modal'
             style={{
-                background: datas.bg
+                background: props.bg
             }}
             onClick={handleClick}
         >
             <div className="modal-center">
-                {datas.children}
+                {props.children}
             </div>
         </div>
     )

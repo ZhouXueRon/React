@@ -1,9 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import types from '../../../utils/commonTypes';
 
 /**
  * 一组多选框
  */
 export default class CheckBoxGroup extends Component {
+
+    /**
+     * 默认属性值
+     */
+    static defaultProps = {
+        datas: [],
+        chooseDatas: []
+    }
+
+    static propTypes = {
+        datas: types.groupDatas.isRequired,
+        name: PropTypes.string.isRequired,
+        chooseDatas: types.chooseDatas,
+        onChange: PropTypes.func
+    }
 
     handleChange = e => {
         let newArr;
