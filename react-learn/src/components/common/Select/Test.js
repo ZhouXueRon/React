@@ -5,7 +5,7 @@ import { getAllStudents } from '../../../services/student';
 export default class Test extends Component {
     state = {
         datas: [],
-        value: []
+        value: ''
     }
 
     componentDidMount = async () => {
