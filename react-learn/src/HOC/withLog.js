@@ -6,7 +6,7 @@ import React from 'react';
  * @returns 新的组件
  */
 export default function withLog(Comp) {
-    return class LogWrapper extends React.Component {
+    class LogWrapper extends React.Component {
 
         componentDidMount() {
             console.log(`日志：组件${Comp.name}被创建了！${Date.now()}`);
@@ -17,7 +17,11 @@ export default function withLog(Comp) {
         }
 
         render() {
-            return <Comp {...this.props} />
+            const { forwardRef, ...reast } = this.props;
+            return <Comp ref={forwardRef} {...reast} />
         }
     }
+    return React.forwardRef((props, ref) => {
+        return <LogWrapper {...props} forwardRef={ref} />
+    })
 }
