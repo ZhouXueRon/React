@@ -1,10 +1,8 @@
 import React from 'react';
-import Test from './components/common/Banner/Test';
+import NewContext from './NewContext';
 
 export default function App() {
     return (
-        <div>
-            <Test />
-        </div>
+        <NewContext />
     )
 }
